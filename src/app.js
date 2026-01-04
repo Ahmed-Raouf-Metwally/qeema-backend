@@ -1,0 +1,38 @@
+const express = require("express");
+const authRoutes = require("./modules/auth/auth.routes");
+const lessonsRoutes = require("./modules/lessons/lessons.routes");
+const adminLessonsRoutes = require("./modules/admin/lessons/admin.lessons.routes");
+const profileRoutes = require("./modules/profile/profile.routes");
+const adminStudentsRoutes = require("./modules/admin/students/admin.students.routes");
+const favoritesRoutes = require("./modules/favorites/favorites.routes");
+const adminDashboardRoutes = require("./modules/admin/dashboard/admin.dashboard.routes");
+const errorHandler = require("./middlewares/error.middleware");
+const cors = require("cors");
+
+// App
+const app = express();
+
+// cors 
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}));
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/lessons", lessonsRoutes);
+app.use("/api/admin", adminLessonsRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/admin", adminStudentsRoutes);
+app.use("/api/favorites", favoritesRoutes);
+app.use("/api/admin", adminDashboardRoutes);
+
+// Error Handler
+app.use(errorHandler);
+
+
+// Export   
+module.exports = app;
