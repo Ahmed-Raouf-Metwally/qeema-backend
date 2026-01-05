@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const authRoutes = require("./modules/auth/auth.routes");
 const lessonsRoutes = require("./modules/lessons/lessons.routes");
 const adminLessonsRoutes = require("./modules/admin/lessons/admin.lessons.routes");
@@ -31,6 +32,19 @@ app.use("/api/admin", adminStudentsRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/api/admin", adminDashboardRoutes);
 app.use("/api/admin", adminSchoolRoutes);
+
+// API 404 Handler (prevent HTML response for API errors)
+app.use("/api", (req, res) => {
+    res.status(404).json({ success: false, message: "API Endpoint Not Found" });
+});
+
+// Serve Static Assets (Frontend)
+app.use(express.static(path.join(__dirname, "../../qeema-frontend/dist")));
+
+// SPA Catch-all
+app.get(/(.*)/, (req, res) => {
+    res.sendFile(path.join(__dirname, "../../qeema-frontend/dist/index.html"));
+});
 
 // Error Handler
 app.use(errorHandler);
