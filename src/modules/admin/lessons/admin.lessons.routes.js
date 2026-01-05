@@ -11,6 +11,13 @@ router.post(
   roleMiddleware("ADMIN"),
   adminLessonsController.createLesson
 );
+
+router.get(
+  "/lessons",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  adminLessonsController.getAllLessons
+);
 router.put(
   "/lessons/:id",
   authMiddleware,

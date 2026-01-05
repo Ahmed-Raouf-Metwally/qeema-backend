@@ -6,6 +6,7 @@ const profileRoutes = require("./modules/profile/profile.routes");
 const adminStudentsRoutes = require("./modules/admin/students/admin.students.routes");
 const favoritesRoutes = require("./modules/favorites/favorites.routes");
 const adminDashboardRoutes = require("./modules/admin/dashboard/admin.dashboard.routes");
+const adminSchoolRoutes = require("./modules/admin/school/admin.school.routes");
 const errorHandler = require("./middlewares/error.middleware");
 const cors = require("cors");
 
@@ -29,6 +30,7 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/admin", adminStudentsRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/api/admin", adminDashboardRoutes);
+app.use("/api/admin", adminSchoolRoutes);
 
 // Error Handler
 app.use(errorHandler);
