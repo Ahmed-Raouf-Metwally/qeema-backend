@@ -14,6 +14,11 @@ const cors = require("cors");
 // App
 const app = express();
 
+// Health Check (Root)
+app.get("/", (req, res) => {
+    res.send("✅ Backend is running successfully on Vercel!");
+});
+
 // cors 
 app.use(cors()); // Allow all origins, no credentials (Bearer token doesn't need credentials)
 
