@@ -27,6 +27,15 @@ model User {
   createdAt DateTime @default(now())
 }
 
+model School {
+  id          String   @id @default(uuid())
+  name        String
+  logo        String?
+  phone       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Lesson {
   id          String   @id @default(uuid())
   name        String
