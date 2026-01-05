@@ -16,7 +16,7 @@ const app = express();
 
 // cors 
 app.use(cors({
-    origin: "*", // Allow all origins for initial deployment (secure this later)
+    origin: true, // Dynamically set Access-Control-Allow-Origin to the request Origin
     credentials: true,
 }));
 
