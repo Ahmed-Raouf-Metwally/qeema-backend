@@ -16,7 +16,7 @@ const app = express();
 
 // cors 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "*", // Allow all origins for initial deployment (secure this later)
     credentials: true,
 }));
 
@@ -33,17 +33,9 @@ app.use("/api/favorites", favoritesRoutes);
 app.use("/api/admin", adminDashboardRoutes);
 app.use("/api/admin", adminSchoolRoutes);
 
-// API 404 Handler (prevent HTML response for API errors)
-app.use("/api", (req, res) => {
+// API 404 Handler
+app.use((req, res) => {
     res.status(404).json({ success: false, message: "API Endpoint Not Found" });
-});
-
-// Serve Static Assets (Frontend)
-app.use(express.static(path.join(__dirname, "../../qeema-frontend/dist")));
-
-// SPA Catch-all
-app.get(/(.*)/, (req, res) => {
-    res.sendFile(path.join(__dirname, "../../qeema-frontend/dist/index.html"));
 });
 
 // Error Handler
