@@ -15,25 +15,7 @@ const cors = require("cors");
 const app = express();
 
 // cors 
-app.use(cors({
-    origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-
-        // Allow Localhost
-        if (origin.startsWith("http://localhost")) return callback(null, true);
-
-        // Allow any Vercel deployment (Production & Previews)
-        if (origin.endsWith(".vercel.app")) return callback(null, true);
-
-        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-    },
-    credentials: true,
-}));
-
-// Handle preflight requests explicitly
-app.options('*', cors());
+app.use(cors()); // Allow all origins, no credentials (Bearer token doesn't need credentials)
 
 // Middleware
 app.use(express.json());
